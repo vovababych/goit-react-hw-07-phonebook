@@ -4,6 +4,7 @@ import * as contactsOperations from '../../redux/contacts/contacts-operations';
 import {
   getFilteredContacts,
   getIsLoading,
+  getError,
 } from '../../redux/contacts/contacts-selectors';
 import PropTypes from 'prop-types';
 import s from './ContactsList.module.css';
@@ -17,12 +18,14 @@ function ContactsList() {
 
   const filteredContacts = useSelector(getFilteredContacts);
   const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
+  console.log('error', error);
 
   const onDeleteContact = id => dispatch(contactsOperations.deleteContact(id));
 
   return (
     <>
-      {!isLoading && filteredContacts.length < 1 && (
+      {!isLoading && !error && filteredContacts.length < 1 && (
         <p className={s.text}>Нет контактов</p>
       )}
 
@@ -47,6 +50,7 @@ function ContactsList() {
           ))}
       </ul>
       {isLoading && <h3> Загрузка ...</h3>}
+      {error && <h3>{error.message}</h3>}
     </>
   );
 }
