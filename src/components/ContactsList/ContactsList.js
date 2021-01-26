@@ -14,12 +14,12 @@ function ContactsList() {
 
   useEffect(() => {
     dispatch(contactsOperations.fetchContacts());
-  }, []);
+  }, [dispatch]);
 
   const filteredContacts = useSelector(getFilteredContacts);
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
-  console.log('error', error);
+  // console.log('error', error);
 
   const onDeleteContact = id => dispatch(contactsOperations.deleteContact(id));
 
@@ -56,8 +56,8 @@ function ContactsList() {
 }
 
 ContactsList.propTypes = {
-  title: PropTypes.string,
-  contacts: PropTypes.array,
+  // title: PropTypes.string,
+  // contacts: PropTypes.array,
   onDeleteContact: PropTypes.func,
 };
 
